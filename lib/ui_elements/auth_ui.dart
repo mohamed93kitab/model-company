@@ -54,8 +54,8 @@ class AuthScreen{
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 8,vertical: 12),
 
-                            width: 72,
-                            height: 72,
+                            width: 112,
+                            height: 112,
                             decoration: BoxDecoration(
                                 color: MyTheme.black,
                                 borderRadius: BorderRadius.circular(8)),
@@ -81,7 +81,7 @@ class AuthScreen{
                       padding: const EdgeInsets.symmetric(horizontal: 18.0),
                       child: Container(
                           padding: EdgeInsets.symmetric(vertical: 20),
-                          decoration: BoxDecorations.buildBoxDecoration_1(radius: 16),
+                          decoration: BoxDecorations.buildBoxDecoration_2(radius: 16),
                           child: child,),
                     ),
                   ],

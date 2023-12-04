@@ -454,6 +454,9 @@
   "cash_on_delivery" : "الدفع عند الإستلام",
   "shipping_info_screen_title" : "معلومات الشحن",
   "shipping_info_screen_btn_continue_to_delivery_info" : "متابعة",
-  "shipping_info_screen_btn_proceed_to_checkout" :"متابعة"
+  "shipping_info_screen_btn_proceed_to_checkout" :"متابعة",
+  "product_details_screen_delete_account" : "حذف الحساب",
+  "order_placed_successfully" : "تم إرسال طلبك بنجاح",
+        "cart_screen_total_price" : "المجموع الكلي"
 
 }

@@ -74,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen> {
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Opacity(
-              opacity: 0.2,
+              opacity: 0.0,
               child: CircleAvatar(
                 backgroundColor: Colors.transparent,
                 child: Hero(
@@ -94,8 +94,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   Hero(
                     tag: "splashscreenImage",
                     child: Container(
-                      height: 102,
-                      width: 102,
+                      height: 172,
+                      width: 172,
                       padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
                       decoration: BoxDecoration(
                         color: MyTheme.black,
@@ -139,7 +139,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 51.0),
                   child: Text(
-                    AppConfig.copyright_text,
+                    "",
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 13.0,

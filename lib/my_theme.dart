@@ -8,6 +8,7 @@ class MyTheme{
   static Color soft_accent_color = Color.fromRGBO(
       0, 0, 0, 0.14901960784313725);
   static Color success = Colors.green;
+  static Color danger = Colors.redAccent;
   static Color splash_screen_color = Color(0xff000000); // if not sure , use the same color as accent color
   /*configurable colors ends*/
 
@@ -22,7 +23,7 @@ class MyTheme{
   static Color medium_grey = Color.fromRGBO(167,175,179, 1);
   static Color medium_grey_50 = Color.fromRGBO(167,175,179, .5);
   static Color grey_153 = Color.fromRGBO(153,153,153, 1);
-  static Color dark_font_grey = Color.fromRGBO(62,68,71, 1);
+  static Color dark_font_grey = Color.fromRGBO(17, 18, 19, 1);
   static Color font_grey = Color.fromRGBO(107,115,119, 1);
   static Color textfield_grey = Color.fromRGBO(209,209,209, 1);
   static Color golden = Color.fromRGBO(255, 168, 0, 1);

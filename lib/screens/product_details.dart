@@ -23,7 +23,7 @@ import 'package:model_company/app_config.dart';
 import 'package:model_company/helpers/shimmer_helper.dart';
 import 'package:model_company/helpers/color_helper.dart';
 import 'package:model_company/helpers/shared_value_helper.dart';
-
+import 'package:intl/intl.dart' as Intl;
 import 'package:model_company/custom/toast_component.dart';
 import 'package:model_company/repositories/chat_repository.dart';
 import 'package:model_company/screens/chat.dart';
@@ -36,7 +36,6 @@ import 'package:model_company/screens/brand_products.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:model_company/custom/box_decorations.dart';
-
 class ProductDetails extends StatefulWidget {
   int id;
 
@@ -189,10 +188,11 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
   }
 
   setProductDetailValues() {
+    var formatter = Intl.NumberFormat('#,###,000');
     if (_productDetails != null) {
       _appbarPriceString = _productDetails.price_high_low;
       _singlePrice = _productDetails.calculable_price;
-      _singlePriceString = _productDetails.main_price;
+      _singlePriceString = formatter.format(int.parse(_productDetails.main_price));
       calculateTotalPrice();
       _stock = _productDetails.current_stock;
       _productDetails.photos.forEach((photo) {
@@ -355,7 +355,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
   }
 
   calculateTotalPrice() {
-    _totalPrice = (_singlePrice * _quantity).toStringAsFixed(2);
+    _totalPrice = (_singlePrice * _quantity).toStringAsFixed(0);
     setState(() {});
   }
 
@@ -923,7 +923,9 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                   SliverToBoxAdapter(
                     child: Container(
                       //padding: EdgeInsets.symmetric(horizontal: 14),
-                      decoration: BoxDecorations.buildBoxDecoration_1(),
+                      decoration: BoxDecoration(
+                         color: MyTheme.accent_color
+                      ),
                       margin: EdgeInsets.symmetric(horizontal: 18),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -934,7 +936,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                             child: _productDetails != null
                                 ? Text(
                                     _productDetails.name,
-                                    style: TextStyles.smallTitleTexStyle(),
+                                    style: TextStyle(fontSize: 16, color: MyTheme.white,fontWeight: FontWeight.w700),
                                     maxLines: 2,
                                   )
                                 : ShimmerHelper().buildBasicShimmer(
@@ -1046,7 +1048,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            color: MyTheme.white,
+                            color: MyTheme.accent_color,
                             margin: EdgeInsets.only(top: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1062,9 +1064,9 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                                     AppLocalizations.of(context)
                                         .product_details_screen_description,
                                     style: TextStyle(
-                                        color: MyTheme.dark_font_grey,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w600),
+                                        color: MyTheme.secondary_color,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 Padding(
@@ -1090,7 +1092,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                           divider(),
                           InkWell(
                             onTap: () {
-                              if (_productDetails.video_link == "") {
+                              if (_productDetails.video_link == "" && _productDetails.video == "") {
                                 ToastComponent.showDialog(
                                     AppLocalizations.of(context)
                                         .product_details_screen_video_not_available,
@@ -1103,6 +1105,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                                   MaterialPageRoute(builder: (context) {
                                 return VideoDescription(
                                   url: _productDetails.video_link,
+                                  video: _productDetails.video
                                 );
                               })).then((value) {
                                 onPopped(value);
@@ -1380,7 +1383,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
   Widget buildSellerRow(BuildContext context) {
     //print("sl:" +  _productDetails.shop_logo);
     return Container(
-      color: MyTheme.light_grey,
+      color: MyTheme.golden,
       padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
       child: Row(
         children: [
@@ -1401,7 +1404,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.0),
                         border: Border.all(
-                            color: Color.fromRGBO(112, 112, 112, .3), width: 1),
+                            color: MyTheme.white, width: 1),
                         //shape: BoxShape.rectangle,
                       ),
                       child: ClipRRect(
@@ -1422,12 +1425,12 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
               children: [
                 Text(_productDetails.added_by == "admin" ? "مراسلة :" : AppLocalizations.of(context).product_details_screen_seller,
                     style: TextStyle(
-                      color: Color.fromRGBO(153, 153, 153, 1),
+                      color: MyTheme.white,
                     )),
                 Text(
                   _productDetails.added_by == "admin" ? AppConfig.app_name : _productDetails.shop_name,
                   style: TextStyle(
-                      color: MyTheme.font_grey,
+                      color: MyTheme.white,
                       fontSize: 14,
                       fontWeight: FontWeight.w600),
                 )
@@ -1453,7 +1456,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
 
                           onTapSellerChat();
                         },
-                        child: Image.asset('assets/chat.png',height: 16,width: 16, color: MyTheme.dark_grey)
+                        child: Image.asset('assets/chat.png',height: 16,width: 16, color: MyTheme.accent_color)
                         ),
                   ],
                 )),
@@ -1464,9 +1467,10 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
   }
 
   Widget buildTotalPriceRow() {
+    var formatter = Intl.NumberFormat('#,###,000');
     return Container(
       height: 40,
-      color: MyTheme.amber,
+      color: MyTheme.accent_color,
       padding: EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
@@ -1481,7 +1485,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                 child: Text(
                   AppLocalizations.of(context).product_details_screen_total_price,
                   style: TextStyle(
-                      color: Color.fromRGBO(153, 153, 153, 1), fontSize: 10),
+                      color: MyTheme.white, fontSize: 13),
                 ),
               ),
             ),
@@ -1489,9 +1493,9 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
           Padding(
             padding: const EdgeInsets.only(left: 5.0),
             child: Text(
-              _productDetails.currency_symbol + _totalPrice.toString(),
+              _productDetails.currency_symbol + " ${formatter.format(double.parse(_totalPrice))}",
               style: TextStyle(
-                  color: MyTheme.accent_color,
+                  color: MyTheme.secondary_color,
                   fontSize: 16.0,
                   fontWeight: FontWeight.w600),
             ),
@@ -1512,7 +1516,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
             width: 75,
             child: Text(
               AppLocalizations.of(context).product_details_screen_quantity,
-              style: TextStyle(color: Color.fromRGBO(153, 153, 153, 1)),
+              style: TextStyle(color: MyTheme.secondary_color, fontSize: 15, fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -1534,7 +1538,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                   child: Center(
                       child: Text(
                     _quantity.toString(),
-                    style: TextStyle(fontSize: 18, color: MyTheme.dark_grey),
+                    style: TextStyle(fontSize: 18, color: MyTheme.white),
                   ))),
               buildQuantityUpButton()
             ],
@@ -1770,7 +1774,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
             width: 75,
             child: Text(
               AppLocalizations.of(context).product_details_screen_color,
-              style: TextStyle(color: Color.fromRGBO(153, 153, 153, 1)),
+              style: TextStyle(color: MyTheme.white),
             ),
           ),
         ),
@@ -1806,7 +1810,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
     return Container(
       // padding: EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-          color: MyTheme.light_bg,
+          color: MyTheme.accent_color.withOpacity(.6),
           border: Border.all(
             color: MyTheme.medium_grey.withOpacity(.3),
           ),
@@ -1817,14 +1821,14 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Text(AppLocalizations.of(context).min_qty),
+              Text(AppLocalizations.of(context).min_qty, style: TextStyle(color: MyTheme.secondary_color),),
               SizedBox(width: 20),
-              Text(AppLocalizations.of(context).max_qty),
+              Text(AppLocalizations.of(context).max_qty, style: TextStyle(color: MyTheme.secondary_color),),
               SizedBox(width: 20),
-              Text(AppLocalizations.of(context).price_pc),
+              Text(AppLocalizations.of(context).price_pc, style: TextStyle(color: MyTheme.secondary_color),),
             ],
           ),
-          Divider(height: 1),
+          Divider(height: 1,color: MyTheme.light_bg.withOpacity(.6)),
           ListView.separated(
             shrinkWrap: true,
             itemCount: _wholesaleList.length,
@@ -1832,7 +1836,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
               return Column(
                 children: [
                   SizedBox(height: 5),
-                  Divider(height: 1),
+                  Divider(height: 1, color: MyTheme.light_bg.withOpacity(.6),),
                   SizedBox(height: 5),
                 ],
               );
@@ -1841,11 +1845,11 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Text(_wholesaleList[index].min_qty.toString()),
+                  Text(_wholesaleList[index].min_qty.toString(), style: TextStyle(color: MyTheme.white),),
                   SizedBox(width: 20),
-                  Text(_wholesaleList[index].max_qty.toString()),
+                  Text(_wholesaleList[index].max_qty.toString(), style: TextStyle(color: MyTheme.white)),
                   SizedBox(width: 20),
-                  Text(_wholesaleList[index].price + " " + _productDetails.currency_symbol),
+                  Text(_wholesaleList[index].price + " " + _productDetails.currency_symbol, style: TextStyle(color: MyTheme.white)),
                 ],
               );
             },
@@ -1903,11 +1907,11 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
         width: _selectedColorIndex == index ? 30 : 25,
         height: _selectedColorIndex == index ? 30 : 25,
         decoration: BoxDecoration(
-          // border: Border.all(
-          //     color: _selectedColorIndex == index
-          //         ? Colors.purple
-          //         : Colors.white,
-          //     width: 1),
+          border: Border.all(
+              color: _selectedColorIndex == index
+                  ? Colors.white
+                  : Colors.white.withOpacity(.3),
+              width: 1),
            borderRadius: BorderRadius.circular(16.0),
           color: ColorHelper.getColorFromColorCode(_colorList[index]),
           boxShadow: [
@@ -1996,23 +2000,27 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
   }
 
   Row buildMainPriceRow() {
+    var formatter = Intl.NumberFormat('#,###,000');
+
     return Row(
       children: [
         Text(
-          _singlePriceString,
+           _singlePriceString,
           style: TextStyle(
-              color: MyTheme.accent_color,
+              color: MyTheme.secondary_color,
               fontSize: 16.0,
               fontWeight: FontWeight.w600),
         ),
         Visibility(
           visible: _productDetails.has_discount,
           child: Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text(_productDetails.stroked_price,
+            padding: app_language_rtl.$
+                      ? EdgeInsets.only(right: 8.0)
+                      : EdgeInsets.only(left: 8.0),
+            child: Text(formatter.format(int.parse(_productDetails.stroked_price)),
                 style: TextStyle(
                   decoration: TextDecoration.lineThrough,
-                  color: Color.fromRGBO(224, 224, 225, 1),
+                  color: MyTheme.secondary_color.withOpacity(.7),
                   fontSize: 12.0,
                   fontWeight: FontWeight.normal,
                 )),
@@ -2073,7 +2081,9 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
   }
 
  Widget buildBottomAppBar(BuildContext context, _addedToCartSnackbar) {
-    return BottomNavigationBar(
+   var formatter = Intl.NumberFormat('#,###,000');
+
+   return BottomNavigationBar(
       backgroundColor: MyTheme.white,
       items: [
         BottomNavigationBarItem(
@@ -2227,13 +2237,8 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                     child: Text(
                       AppLocalizations.of(context).product_details_screen_brand,
                       style: TextStyle(
-                          color: Color.fromRGBO(
-                            153,
-                            153,
-                            153,
-                            1,
-                          ),
-                          fontSize: 10),
+                          color: MyTheme.white,
+                          fontSize: 13),
                     ),
                   ),
                 ),
@@ -2242,9 +2247,9 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                   child: Text(
                     _productDetails.brand.name,
                     style: TextStyle(
-                        color: MyTheme.font_grey,
+                        color: MyTheme.white.withOpacity(.6),
                         fontWeight: FontWeight.bold,
-                        fontSize: 10),
+                        fontSize: 15),
                   ),
                 ),
                 /*Spacer(),
@@ -2279,7 +2284,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
         children: <Widget>[
           Expandable(
             collapsed: Container(
-                height: 50, child: Html(data: _productDetails.description)),
+                height: 50, child: Html(data: _productDetails.description,)),
             expanded: Container(child: Html(data: _productDetails.description)),
           ),
           Row(
@@ -2293,7 +2298,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                       !controller.expanded
                           ? AppLocalizations.of(context).common_view_more
                           : AppLocalizations.of(context).common_show_less,
-                      style: TextStyle(color: MyTheme.font_grey, fontSize: 11),
+                      style: TextStyle(color: MyTheme.white, fontSize: 11),
                     ),
                     onPressed: () {
                       controller.toggle();
@@ -2345,7 +2350,9 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                 name: _topProducts[index].name,
                 main_price: _topProducts[index].main_price,
                 stroked_price: _topProducts[index].stroked_price,
-                has_discount: _topProducts[index].has_discount);
+                has_discount: _topProducts[index].has_discount,
+               currency_symbol: _topProducts[index].currency_symbol,
+);
           },
         ),
       );
@@ -2403,7 +2410,9 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                   name: _relatedProducts[index].name,
                   main_price: _relatedProducts[index].main_price,
                   stroked_price: _relatedProducts[index].stroked_price,
-                  has_discount: _relatedProducts[index].has_discount);
+                  has_discount: _relatedProducts[index].has_discount,
+                  currency_symbol: _relatedProducts[index].currency_symbol,
+);
             },
           ),
         ),
@@ -2421,10 +2430,22 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
   }
 
   buildQuantityUpButton() => Container(
-        decoration: BoxDecorations.buildCircularButtonDecoration_1(),
+        decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(36.0),
+        border: Border.all(color: MyTheme.secondary_color),
+        color: Color(0xff343a40),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(.08),
+            blurRadius: 20,
+            spreadRadius: 0.0,
+            offset: Offset(0.0, 10.0), // shadow direction: bottom right
+          )
+        ],
+      ),
         width: 36,
         child: IconButton(
-            icon: Icon(FontAwesome.plus, size: 16, color: MyTheme.dark_grey),
+            icon: Icon(FontAwesome.plus, size: 16, color: MyTheme.secondary_color),
             onPressed: () {
               if (_quantity < _stock) {
                 _quantity++;
@@ -2444,10 +2465,22 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
       );
 
   buildQuantityDownButton() => Container(
-      decoration: BoxDecorations.buildCircularButtonDecoration_1(),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(36.0),
+        border: Border.all(color: MyTheme.secondary_color),
+        color: Color(0xff343a40),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(.08),
+            blurRadius: 20,
+            spreadRadius: 0.0,
+            offset: Offset(0.0, 10.0), // shadow direction: bottom right
+          )
+        ],
+      ),
       width: 36,
       child: IconButton(
-          icon: Icon(FontAwesome.minus, size: 16, color: MyTheme.dark_grey),
+          icon: Icon(FontAwesome.minus, size: 16, color: MyTheme.secondary_color),
           onPressed: () {
             if (_quantity > 1) {
               _quantity--;

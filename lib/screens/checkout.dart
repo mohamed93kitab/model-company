@@ -25,6 +25,8 @@ import 'package:model_company/screens/offline_screen.dart';
 import 'package:model_company/screens/paytm_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'order_success_screen.dart';
+
 class Checkout extends StatefulWidget {
   int order_id; // only need when making manual payment from order details
   bool
@@ -410,7 +412,7 @@ class _CheckoutState extends State<Checkout> {
     }
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return OrderList(from_checkout: true);
+      return OrderSuccessScreen();
     }));
   }
 
@@ -426,7 +428,7 @@ class _CheckoutState extends State<Checkout> {
     }
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return OrderList(from_checkout: true);
+      return OrderSuccessScreen();
     }));
   }
 
@@ -442,7 +444,7 @@ Navigator.pop(loadingcontext);
     }
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return OrderList(from_checkout: true);
+      return OrderSuccessScreen();
     }));
   }
 

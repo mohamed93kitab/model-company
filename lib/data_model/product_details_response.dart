@@ -60,6 +60,7 @@ class DetailedProduct {
     this.earn_point,
     this.description,
     this.video_link,
+    this.video,
     this.link,
     this.brand,
     this.wholesale
@@ -91,6 +92,7 @@ class DetailedProduct {
   int earn_point;
   String description;
   String video_link;
+  String video;
   String link;
   Brand brand;
   List<Wholesale> wholesale;
@@ -122,6 +124,7 @@ class DetailedProduct {
     earn_point: json["earn_point"].toInt(),
     description: json["description"] == null || json["description"] == "" ? "No Description is available" : json['description'],
     video_link: json["video_link"],
+    video: json["video"],
     link: json["link"],
     brand: Brand.fromJson(json["brand"]),
     wholesale: List<Wholesale>.from(json["wholesale"].map((x) => Wholesale.fromJson(x))),
@@ -153,6 +156,7 @@ class DetailedProduct {
     "earn_point": earn_point,
     "description": description,
     "video_link": video_link,
+    "video": video,
     "link": link,
     "brand": brand.toJson(),
     "wholesale": List<dynamic>.from(wholesale.map((x) => x.toJson())),

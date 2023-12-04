@@ -18,7 +18,7 @@ import 'package:model_company/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:model_company/custom/common_functions.dart';
-
+import 'package:intl/intl.dart' as Intl;
 class Cart extends StatefulWidget {
   Cart({Key key, this.has_bottomnav,this.from_navigation = false, this.counter}) : super(key: key);
   final bool has_bottomnav;
@@ -36,6 +36,7 @@ class _CartState extends State<Cart> {
   bool _isInitial = true;
   var _cartTotal = 0.00;
   var _cartTotalString = ". . .";
+  var formatter = Intl.NumberFormat('#,##,000');
 
   @override
   void initState() {
@@ -85,11 +86,11 @@ class _CartState extends State<Cart> {
       _shopList.forEach((shop) {
         if (shop.cart_items.length > 0) {
           shop.cart_items.forEach((cart_item) {
-            _cartTotal += double.parse(
+            _cartTotal +=  double.parse(
                 ((cart_item.price + cart_item.tax) * cart_item.quantity)
-                    .toStringAsFixed(2));
+                    .toStringAsFixed(0));
             _cartTotalString =
-                "${cart_item.currency_symbol}${_cartTotal.toStringAsFixed(2)}";
+                "${cart_item.currency_symbol}${formatter.format(int.parse(_cartTotal.toStringAsFixed(0)))}";
           });
         }
       });
@@ -105,7 +106,7 @@ class _CartState extends State<Cart> {
       _shopList[index].cart_items.forEach((cart_item) {
         partialTotal += (cart_item.price + cart_item.tax) * cart_item.quantity;
         partialTotalString =
-            "${cart_item.currency_symbol}${partialTotal.toStringAsFixed(2)}";
+            "${cart_item.currency_symbol}${formatter.format(int.parse(partialTotal.toStringAsFixed(0)))}";
       });
     }
 
@@ -347,7 +348,7 @@ class _CartState extends State<Cart> {
                         TextStyle(color: MyTheme.white, fontSize: 13,fontWeight: FontWeight.w700),
                   ),
                   Spacer(),
-                  Text("$_cartTotalString",
+                  Text("${_cartTotalString}",
                       style: TextStyle(
                           color: MyTheme.white,
                           fontSize: 16,
@@ -527,7 +528,7 @@ class _CartState extends State<Cart> {
                   child: Row(
                     children: [
                       Text(
-                        'Total Price',
+                        AppLocalizations.of(context).cart_screen_total_price,
                         style: TextStyle(
                             color: MyTheme.dark_font_grey,
                             fontWeight: FontWeight.w700,
@@ -545,6 +546,7 @@ class _CartState extends State<Cart> {
                   ),
                 ),
                 buildCartSellerItemList(index),
+               // SizedBox(height: MediaQuery.of(context).size.height * .2,),
               ],
             );
           },
@@ -572,7 +574,17 @@ class _CartState extends State<Cart> {
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return buildCartSellerItemCard(seller_index, index);
+          if(index == _shopList[seller_index].cart_items.length - 1) {
+            return Column(
+              children: [
+                buildCartSellerItemCard(seller_index, index),
+                SizedBox(height: 120,)
+              ],
+            );
+          }else {
+            return buildCartSellerItemCard(seller_index, index);
+          }
+
         },
       ),
     );
@@ -621,7 +633,7 @@ class _CartState extends State<Cart> {
                               maxLines: 2,
                               style: TextStyle(
                                 height: 1.18,
-                                  color: MyTheme.font_grey,
+                                  color: MyTheme.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600),
                             ),
@@ -703,23 +715,25 @@ class _CartState extends State<Cart> {
                         Padding(
                           padding: const EdgeInsets.only(top: 4.0),
                           child: Text(
-                            _shopList[seller_index]
-                                .cart_items[item_index]
-                                .currency_symbol +
+                            formatter.format(int.parse(
                                 (_shopList[seller_index]
                                     .cart_items[item_index]
                                     .price *
                                     _shopList[seller_index]
                                         .cart_items[item_index]
                                         .quantity)
-                                    .toStringAsFixed(2),
+                                    .toStringAsFixed(0))) + " " + _shopList[seller_index]
+                              .cart_items[item_index]
+                              .currency_symbol,
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
+
                             style: TextStyle(
-                                color: MyTheme.accent_color,
+                                color: MyTheme.secondary_color,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700),
+
                           ),
                         ),
                       ],

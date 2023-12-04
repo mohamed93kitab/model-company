@@ -1,3 +1,4 @@
+import 'package:model_company/my_theme.dart';
 import 'package:model_company/screens/change_language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,6 +52,7 @@ class _MainDrawerState extends State<MainDrawer> {
             app_language_rtl.$ ? TextDirection.rtl : TextDirection.ltr,
         child: Container(
           padding: EdgeInsets.only(top: 50),
+          color: MyTheme.accent_color,
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -61,26 +63,27 @@ class _MainDrawerState extends State<MainDrawer> {
                              "${avatar_original.$}",
                           ),
                         ),
-                        title: Text("${user_name.$}"),
+                        title: Text("${user_name.$}", style: TextStyle(color: MyTheme.secondary_color),),
                         subtitle: Text(
                           //if user email is not available then check user phone if user phone is not available use empty string
                           "${user_email.$ != "" && user_email.$ != null ? user_email.$ : user_phone.$ != "" && user_phone.$ != null ? user_phone.$ : ''}",
+                            style: TextStyle(color: MyTheme.white.withOpacity(.7))
                         ))
                     : Text(
                         AppLocalizations.of(context).main_drawer_not_logged_in,
                         style: TextStyle(
-                            color: Color.fromRGBO(153, 153, 153, 1),
+                            color: MyTheme.secondary_color,
                             fontSize: 14)),
                 Divider(),
                 ListTile(
                     visualDensity: VisualDensity(horizontal: -4, vertical: -4),
                     leading: Image.asset("assets/language.png",
-                        height: 16, color: Color.fromRGBO(153, 153, 153, 1)),
+                        height: 16, color: MyTheme.secondary_color),
                     title: Text(
                         AppLocalizations.of(context)
                             .main_drawer_change_language,
                         style: TextStyle(
-                            color: Color.fromRGBO(153, 153, 153, 1),
+                            color: MyTheme.secondary_color,
                             fontSize: 14)),
                     onTap: () {
                       Navigator.push(context,
@@ -91,10 +94,10 @@ class _MainDrawerState extends State<MainDrawer> {
                 ListTile(
                     visualDensity: VisualDensity(horizontal: -4, vertical: -4),
                     leading: Image.asset("assets/home.png",
-                        height: 16, color: Color.fromRGBO(153, 153, 153, 1)),
+                        height: 16, color: MyTheme.secondary_color),
                     title: Text(AppLocalizations.of(context).main_drawer_home,
                         style: TextStyle(
-                            color: Color.fromRGBO(153, 153, 153, 1),
+                            color: MyTheme.secondary_color,
                             fontSize: 14)),
                     onTap: () {
                       Navigator.push(context,
@@ -110,12 +113,12 @@ class _MainDrawerState extends State<MainDrawer> {
                                   VisualDensity(horizontal: -4, vertical: -4),
                               leading: Image.asset("assets/profile.png",
                                   height: 16,
-                                  color: Color.fromRGBO(153, 153, 153, 1)),
+                                  color: MyTheme.secondary_color),
                               title: Text(
                                   AppLocalizations.of(context)
                                       .main_drawer_profile,
                                   style: TextStyle(
-                                      color: Color.fromRGBO(153, 153, 153, 1),
+                                      color: MyTheme.secondary_color,
                                       fontSize: 14)),
                               onTap: () {
                                 Navigator.push(context,
@@ -128,12 +131,12 @@ class _MainDrawerState extends State<MainDrawer> {
                                   VisualDensity(horizontal: -4, vertical: -4),
                               leading: Image.asset("assets/order.png",
                                   height: 16,
-                                  color: Color.fromRGBO(153, 153, 153, 1)),
+                                  color: MyTheme.secondary_color),
                               title: Text(
                                   AppLocalizations.of(context)
                                       .main_drawer_orders,
                                   style: TextStyle(
-                                      color: Color.fromRGBO(153, 153, 153, 1),
+                                      color: MyTheme.secondary_color,
                                       fontSize: 14)),
                               onTap: () {
                                 Navigator.push(context,
@@ -146,12 +149,12 @@ class _MainDrawerState extends State<MainDrawer> {
                                   VisualDensity(horizontal: -4, vertical: -4),
                               leading: Image.asset("assets/heart.png",
                                   height: 16,
-                                  color: Color.fromRGBO(153, 153, 153, 1)),
+                                  color: MyTheme.secondary_color),
                               title: Text(
                                   AppLocalizations.of(context)
                                       .main_drawer_my_wishlist,
                                   style: TextStyle(
-                                      color: Color.fromRGBO(153, 153, 153, 1),
+                                      color: MyTheme.secondary_color,
                                       fontSize: 14)),
                               onTap: () {
                                 Navigator.push(context,
@@ -166,12 +169,12 @@ class _MainDrawerState extends State<MainDrawer> {
                                     VisualDensity(horizontal: -4, vertical: -4),
                                 leading: Image.asset("assets/chat.png",
                                     height: 16,
-                                    color: Color.fromRGBO(153, 153, 153, 1)),
+                                    color: MyTheme.secondary_color),
                                 title: Text(
                                     AppLocalizations.of(context)
                                         .main_drawer_messages,
                                     style: TextStyle(
-                                        color: Color.fromRGBO(153, 153, 153, 1),
+                                        color: MyTheme.secondary_color,
                                         fontSize: 14)),
                                 onTap: () {
                                   Navigator.push(context,
@@ -186,13 +189,13 @@ class _MainDrawerState extends State<MainDrawer> {
                                       horizontal: -4, vertical: -4),
                                   leading: Image.asset("assets/wallet.png",
                                       height: 16,
-                                      color: Color.fromRGBO(153, 153, 153, 1)),
+                                      color: MyTheme.secondary_color),
                                   title: Text(
                                       AppLocalizations.of(context)
                                           .main_drawer_wallet,
                                       style: TextStyle(
                                           color:
-                                              Color.fromRGBO(153, 153, 153, 1),
+                                              MyTheme.secondary_color,
                                           fontSize: 14)),
                                   onTap: () {
                                     Navigator.push(context,
@@ -211,11 +214,11 @@ class _MainDrawerState extends State<MainDrawer> {
                             VisualDensity(horizontal: -4, vertical: -4),
                         leading: Image.asset("assets/login.png",
                             height: 16,
-                            color: Color.fromRGBO(153, 153, 153, 1)),
+                            color: MyTheme.secondary_color),
                         title: Text(
                             AppLocalizations.of(context).main_drawer_login,
                             style: TextStyle(
-                                color: Color.fromRGBO(153, 153, 153, 1),
+                                color: MyTheme.secondary_color,
                                 fontSize: 14)),
                         onTap: () {
                           Navigator.push(context,
@@ -231,11 +234,11 @@ class _MainDrawerState extends State<MainDrawer> {
                             VisualDensity(horizontal: -4, vertical: -4),
                         leading: Image.asset("assets/logout.png",
                             height: 16,
-                            color: Color.fromRGBO(153, 153, 153, 1)),
+                            color: MyTheme.secondary_color),
                         title: Text(
                             AppLocalizations.of(context).main_drawer_logout,
                             style: TextStyle(
-                                color: Color.fromRGBO(153, 153, 153, 1),
+                                color: MyTheme.secondary_color,
                                 fontSize: 14)),
                         onTap: () {
                           onTapLogout(context);

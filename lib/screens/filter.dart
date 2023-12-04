@@ -436,27 +436,27 @@ class _FilterState extends State<Filter> {
       children: [
         Container(
           decoration: BoxDecoration(
-              color: Colors.white,
+              color:  MyTheme.accent_color,
               border: Border.symmetric(
-                  vertical: BorderSide(color: MyTheme.light_grey, width: .5),
-                  horizontal: BorderSide(color: MyTheme.light_grey, width: 1))),
+                  vertical: BorderSide(color: MyTheme.dark_grey, width: .5),
+                  horizontal: BorderSide(color: MyTheme.dark_grey, width: 1))),
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           height: 36,
           width: MediaQuery.of(context).size.width * .33,
           child: new DropdownButton<WhichFilter>(
             icon: Padding(
               padding: app_language_rtl.$ ? const EdgeInsets.only(right: 12.0) :  const EdgeInsets.only(left: 18.0),
-              child: Icon(Icons.expand_more, color: Colors.black54),
+              child: Icon(Icons.expand_more, color:  MyTheme.secondary_color,),
             ),
             hint: Text(
               AppLocalizations.of(context).filter_screen_products,
               style: TextStyle(
-                color: Colors.black,
+                color:  MyTheme.secondary_color,
                 fontSize: 13,
               ),
             ),
             style: TextStyle(
-                color: Colors.black,
+                color:  MyTheme.secondary_color,
                 fontSize: 13),
             iconSize: 13,
             underline: SizedBox(),
@@ -483,11 +483,11 @@ class _FilterState extends State<Filter> {
           },
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: MyTheme.accent_color,
                 border: Border.symmetric(
-                    vertical: BorderSide(color: MyTheme.light_grey, width: .5),
+                    vertical: BorderSide(color: MyTheme.dark_grey, width: .5),
                     horizontal:
-                        BorderSide(color: MyTheme.light_grey, width: 1))),
+                        BorderSide(color: MyTheme.dark_grey, width: 1))),
             height: 36,
             width: MediaQuery.of(context).size.width * .33,
             child: Center(
@@ -498,12 +498,13 @@ class _FilterState extends State<Filter> {
                   Icon(
                     Icons.filter_alt_outlined,
                     size: 13,
+                    color: MyTheme.secondary_color,
                   ),
                   SizedBox(width: 2),
                   Text(
                     AppLocalizations.of(context).filter_screen_filter,
                     style: TextStyle(
-                      color: Colors.black,
+                      color:  MyTheme.secondary_color,
                       fontSize: 13,
                     ),
                   ),
@@ -636,7 +637,7 @@ class _FilterState extends State<Filter> {
                               TextButton(
                                 child: Text(
                                   AppLocalizations.of(context).common_close_in_all_capital,
-                                  style: TextStyle(color: MyTheme.medium_grey),
+                                  style: TextStyle(color: MyTheme.secondary_color),
                                 ),
                                 onPressed: () {
                                   Navigator.of(context, rootNavigator: true)
@@ -653,11 +654,11 @@ class _FilterState extends State<Filter> {
           },
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: MyTheme.accent_color,
                 border: Border.symmetric(
-                    vertical: BorderSide(color: MyTheme.light_grey, width: .5),
+                    vertical: BorderSide(color: MyTheme.dark_grey, width: .5),
                     horizontal:
-                        BorderSide(color: MyTheme.light_grey, width: 1))),
+                        BorderSide(color: MyTheme.dark_grey, width: 1))),
             height: 36,
             width: MediaQuery.of(context).size.width * .33,
             child: Center(
@@ -667,13 +668,14 @@ class _FilterState extends State<Filter> {
                 children: [
                   Icon(
                     Icons.swap_vert,
+                    color: MyTheme.secondary_color,
                     size: 13,
                   ),
                   SizedBox(width: 2),
                   Text(
                     "Sort",
                     style: TextStyle(
-                      color: Colors.black,
+                      color: MyTheme.secondary_color,
                       fontSize: 13,
                     ),
                   ),
@@ -1104,6 +1106,7 @@ class _FilterState extends State<Filter> {
                       stroked_price: _productList[index].stroked_price,
                       has_discount: _productList[index].has_discount,
                       discount: _productList[index].discount,
+                      currency_symbol: _productList[index].currency_symbol,
                   );
                 },
               )

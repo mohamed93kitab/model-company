@@ -198,5 +198,21 @@ class AuthRepository {
     return userByTokenResponseFromJson(response.body);
   }
 
+  Future<LogoutResponse> deleteAccountResponse({id}) async {
+    Uri url = Uri.parse("${AppConfig.BASE_URL}/auth/delete-account/"+id.toString());
+    final response = await http.post(
+      url,
+      headers: {
+        "Accept": "*/*",
+        "Content-Type": "application/json",
+        "App-Language": app_language.$,
+      },
+    );
+
+    print(response.body);
+
+    return logoutResponseFromJson(response.body);
+  }
+
 
 }

@@ -257,12 +257,12 @@ class _OrderListState extends State<OrderList> {
             child: new DropdownButton<PaymentStatus>(
               icon: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Icon(Icons.expand_more, color: Colors.black54),
+                child: Icon(Icons.expand_more, color: Colors.white),
               ),
               hint: Text(
                 AppLocalizations.of(context).order_list_screen_all_payments,
                 style: TextStyle(
-                  color: MyTheme.font_grey,
+                  color: MyTheme.white.withOpacity(.7),
                   fontSize: 12,
                 ),
               ),
@@ -288,12 +288,12 @@ class _OrderListState extends State<OrderList> {
             child: new DropdownButton<DeliveryStatus>(
               icon: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Icon(Icons.expand_more, color: Colors.black54),
+                child: Icon(Icons.expand_more, color: Colors.white),
               ),
               hint: Text(
                 AppLocalizations.of(context).order_list_screen_all_deliveries,
                 style: TextStyle(
-                  color: MyTheme.font_grey,
+                  color: MyTheme.white.withOpacity(.7),
                   fontSize: 12,
                 ),
               ),
@@ -454,7 +454,7 @@ class _OrderListState extends State<OrderList> {
               child: Text(
                 _orderList[index].code,
                 style: TextStyle(
-                    color: MyTheme.accent_color,
+                    color: MyTheme.white,
                     fontSize: 13,
                     fontWeight: FontWeight.w600),
               ),
@@ -465,12 +465,12 @@ class _OrderListState extends State<OrderList> {
                 children: [
 
                   Text(_orderList[index].date,
-                      style: TextStyle(color: MyTheme.dark_font_grey, fontSize: 12)),
+                      style: TextStyle(color: MyTheme.white.withOpacity(.7), fontSize: 12)),
                   Spacer(),
                   Text(
                     _orderList[index].grand_total,
                     style: TextStyle(
-                        color: MyTheme.accent_color,
+                        color: MyTheme.secondary_color,
                         fontSize: 16,
                         fontWeight: FontWeight.w600),
                   )
@@ -484,7 +484,7 @@ class _OrderListState extends State<OrderList> {
 
                   Text(
                     "${AppLocalizations.of(context).order_list_screen_payment_status} - ",
-                    style: TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
+                    style: TextStyle(color: MyTheme.white.withOpacity(.7), fontSize: 12),
                   ),
                   Text(
                     _orderList[index].payment_status_string,
@@ -497,11 +497,11 @@ class _OrderListState extends State<OrderList> {
               children: [
                 Text(
                   "${AppLocalizations.of(context).order_list_screen_delivery_status} -",
-                  style: TextStyle(color: MyTheme.dark_font_grey, fontSize: 12),
+                  style: TextStyle(color: MyTheme.white.withOpacity(.7), fontSize: 12),
                 ),
                 Text(
                   _orderList[index].delivery_status_string,
-                  style: TextStyle(color: MyTheme.dark_font_grey, fontSize: 12,fontWeight: FontWeight.w500),
+                  style: TextStyle(color: MyTheme.secondary_color, fontSize: 12,fontWeight: FontWeight.w500),
                 ),
               ],
             )

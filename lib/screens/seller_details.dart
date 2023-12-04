@@ -378,7 +378,8 @@ class _SellerDetailsState extends State<SellerDetails> {
                         name: _featuredProducts[index].name,
                         main_price: _featuredProducts[index].main_price,
                         stroked_price: _featuredProducts[index].stroked_price,
-                        has_discount: _featuredProducts[index].has_discount),
+                        has_discount: _featuredProducts[index].has_discount,
+                        currency_symbol: _featuredProducts[index].currency_symbol,),
                   );
                 },
                 separatorBuilder: (context, index) {
@@ -675,6 +676,7 @@ class _SellerDetailsState extends State<SellerDetails> {
               stroked_price: _topProducts[index].stroked_price,
               has_discount: _topProducts[index].has_discount,
               discount: _topProducts[index].discount,
+            currency_symbol: _topProducts[index].currency_symbol,
           );
         });
   }
@@ -701,6 +703,7 @@ class _SellerDetailsState extends State<SellerDetails> {
                 stroked_price: _newArrivalProducts[index].stroked_price,
                 has_discount: _newArrivalProducts[index].has_discount,
                 discount: _newArrivalProducts[index].discount,
+                currency_symbol: _newArrivalProducts[index].currency_symbol,
             );
           });
     } else if (_newArrivalProducts.length == 0) {
@@ -977,6 +980,7 @@ class _SellerDetailsState extends State<SellerDetails> {
               stroked_price: _allProductList[index].stroked_price,
               has_discount: _allProductList[index].has_discount,
               discount: _allProductList[index].discount,
+              currency_symbol: _allProductList[index].currency_symbol,
           );
         });
   }

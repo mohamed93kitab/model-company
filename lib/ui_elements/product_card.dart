@@ -3,6 +3,7 @@ import 'package:model_company/my_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:model_company/screens/product_details.dart';
 import 'package:model_company/app_config.dart';
+import 'package:intl/intl.dart' as Intl;
 class ProductCard extends StatefulWidget {
 
   int id;
@@ -10,10 +11,11 @@ class ProductCard extends StatefulWidget {
   String name;
   String main_price;
   String stroked_price;
+  String currency_symbol;
   bool has_discount;
   var discount;
 
-  ProductCard({Key key,this.id, this.image, this.name, this.main_price,this.stroked_price,this.has_discount,this.discount}) : super(key: key);
+  ProductCard({Key key,this.id, this.image, this.name, this.main_price,this.currency_symbol,this.stroked_price,this.has_discount,this.discount}) : super(key: key);
 
   @override
   _ProductCardState createState() => _ProductCardState();
@@ -22,6 +24,7 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
+    var formatter = Intl.NumberFormat('#,###,000');
     print((MediaQuery.of(context).size.width - 48 ) / 2);
     return InkWell(
       onTap: () {
@@ -86,7 +89,7 @@ class _ProductCardState extends State<ProductCard> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 0, 12, 16),
                         child: Text(
-                          widget.stroked_price,
+                          formatter.format(int.parse(widget.stroked_price)) + " " + widget.currency_symbol,
                           textAlign: TextAlign.left,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
@@ -101,7 +104,7 @@ class _ProductCardState extends State<ProductCard> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(12, 0, 12, 16),
                         child: Text(
-                          widget.main_price,
+                          formatter.format(int.parse(widget.main_price)) + " " + widget.currency_symbol,
                           textAlign: TextAlign.left,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,

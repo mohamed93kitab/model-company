@@ -44,6 +44,7 @@ class Product {
     this.main_price,
     this.stroked_price,
     this.has_discount,
+    this.currency_symbol,
     this.discount,
     this.rating,
     this.sales,
@@ -55,6 +56,7 @@ class Product {
   String thumbnail_image;
   String main_price;
   String stroked_price;
+  String currency_symbol;
   bool has_discount;
   var discount;
   int rating;
@@ -67,6 +69,7 @@ class Product {
     thumbnail_image: json["thumbnail_image"],
     main_price: json["main_price"],
     stroked_price: json["stroked_price"],
+    currency_symbol: json["currency_symbol"],
     has_discount: json["has_discount"],
     discount: json["discount"],
     rating: json["rating"].toInt(),
@@ -80,6 +83,7 @@ class Product {
     "thumbnail_image": thumbnail_image,
     "main_price": main_price,
     "stroked_price": stroked_price,
+    "currency_symbol": currency_symbol,
     "has_discount": has_discount,
     "discount": discount,
     "rating": rating,

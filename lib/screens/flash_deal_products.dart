@@ -220,6 +220,7 @@ class _FlashDealProductsState extends State<FlashDealProducts> {
                           stroked_price: _searchList[index].stroked_price,
                           has_discount: _searchList[index].has_discount,
                           discount: _searchList[index].discount,
+                          currency_symbol: _searchList[index].currency_symbol,
                       );
                     },
                   ),

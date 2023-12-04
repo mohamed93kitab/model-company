@@ -524,6 +524,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               stroked_price: _allProductList[index].stroked_price,
               has_discount: _allProductList[index].has_discount,
             discount: _allProductList[index].discount,
+            currency_symbol: _allProductList[index].currency_symbol,
           );
         },
       );
@@ -559,6 +560,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 stroked_price: _allProductList[index].stroked_price,
                 has_discount: _allProductList[index].has_discount,
               discount: _allProductList[index].discount,
+              currency_symbol: _allProductList[index].currency_symbol,
             );
           });
     } else if (_totalAllProductData == 0) {
@@ -726,7 +728,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         main_price: _featuredProductList[index].main_price,
                         stroked_price:
                             _featuredProductList[index].stroked_price,
-                        has_discount: _featuredProductList[index].has_discount);
+                        has_discount: _featuredProductList[index].has_discount,
+                        currency_symbol: _featuredProductList[index].currency_symbol,
+                  );
               },
             ),
           ),
@@ -772,8 +776,9 @@ Widget  buildHomeMenuRow1(BuildContext context) {
                   Text(AppLocalizations.of(context).home_screen_top_sellers,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Color.fromRGBO(132, 132, 132, 1),
-                          fontWeight: FontWeight.w300)),
+                          color: MyTheme.secondary_color,
+                         fontWeight: FontWeight.bold,
+                          fontSize: 14)),
                 ],
               ),
             ),
@@ -804,8 +809,9 @@ Widget  buildHomeMenuRow1(BuildContext context) {
                   Text(AppLocalizations.of(context).home_screen_flash_deal,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Color.fromRGBO(132, 132, 132, 1),
-                          fontWeight: FontWeight.w300)),
+                          color: MyTheme.secondary_color,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14)),
                 ],
               ),
             ),
@@ -846,8 +852,9 @@ Widget  buildHomeMenuRow1(BuildContext context) {
                     AppLocalizations.of(context).home_screen_top_categories,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Color.fromRGBO(132, 132, 132, 1),
-                        fontWeight: FontWeight.w300),
+                        color: MyTheme.secondary_color,
+                        fontWeight: FontWeight.bold,
+                          fontSize: 14),
                   )
                 ],
               ),
@@ -884,8 +891,9 @@ Widget  buildHomeMenuRow1(BuildContext context) {
                   Text(AppLocalizations.of(context).home_screen_brands,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Color.fromRGBO(132, 132, 132, 1),
-                          fontWeight: FontWeight.w300)),
+                          color: MyTheme.secondary_color,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14)),
                 ],
               ),
             ),
@@ -1130,9 +1138,9 @@ Widget  buildHomeBannerOne(context) {
             height: 40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: MyTheme.soft_accent_color
+              color: MyTheme.accent_color
             ),
-            child: Icon(Icons.menu, color: MyTheme.accent_color,)),
+            child: Icon(Icons.menu, color: MyTheme.secondary_color,)),
       ),
       actions: [
         GestureDetector(
@@ -1142,7 +1150,7 @@ Widget  buildHomeBannerOne(context) {
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 18, bottom: 18),
                 child: Image.asset("assets/chat.png",
                     height: 22,
-                    color: Color.fromRGBO(153, 153, 153, 1))
+                    color: MyTheme.accent_color)
               // padding: EdgeInsets.all(4),
 
 
@@ -1161,7 +1169,7 @@ Widget  buildHomeBannerOne(context) {
                   // borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
                     "assets/cart.png",
-                    color:  Color.fromRGBO(153, 153, 153, 1),
+                    color:  MyTheme.secondary_color,
                     height: 22,
                   ),
                   // padding: EdgeInsets.all(4),

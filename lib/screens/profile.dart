@@ -29,6 +29,8 @@ import 'package:model_company/custom/toast_component.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../ui_elements/custom_dialog.dart';
+
 class Profile extends StatefulWidget {
   Profile({Key key, this.show_back_button = false}) : super(key: key);
 
@@ -41,7 +43,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   ScrollController _mainScrollController = ScrollController();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
+  bool _isDialogShowing = false;
   int _cartCounter = 0;
   String _cartCounterString = "...";
   int _wishlistCounter = 0;
@@ -143,14 +145,23 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: app_language_rtl.$ ? TextDirection.rtl : TextDirection.ltr,
-      child: Scaffold(
-        key: _scaffoldKey,
-        //drawer: MainDrawer(),
-        backgroundColor: Colors.white,
-        //appBar: buildAppBar(context),
-        body: buildBody(context),
+    return WillPopScope(
+      onWillPop: () {
+        if(_isDialogShowing) {
+          Navigator.of(context, rootNavigator: true).pop();
+        }else {
+          Navigator.pop(context);
+        }
+      },
+      child: Directionality(
+        textDirection: app_language_rtl.$ ? TextDirection.rtl : TextDirection.ltr,
+        child: Scaffold(
+          key: _scaffoldKey,
+          //drawer: MainDrawer(),
+          backgroundColor: Colors.white,
+          //appBar: buildAppBar(context),
+          body: buildBody(context),
+        ),
       ),
     );
   }
@@ -230,6 +241,44 @@ class _ProfileState extends State<Profile> {
                       //   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                       //   child: buildBottomVerticalCardList(),
                       // ),
+
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            _isDialogShowing = true;
+                          });
+                          showDialog(context: context,
+                              builder: (BuildContext context){
+                                return CustomDialogBox(
+                                  title: "هل أنت متأكد من حذف حسابك؟",
+                                );
+                              }
+                          ).then((_) {
+                            setState(() {
+                              _isDialogShowing = false;
+                            });
+                          });
+
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(horizontal: 16),
+                          width: MediaQuery.of(context).size.width,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: MyTheme.danger,
+                              borderRadius: BorderRadius.circular(12)
+                          ),
+                          child: Text(
+                            AppLocalizations.of(context).product_details_screen_delete_account,
+                            style: TextStyle(
+                                color: MyTheme.white
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(height: 25,),
                     ]),
                   )
                 ],
@@ -1165,11 +1214,10 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
-
   Widget buildTopSection() {
 
     return Container(
-     // color: Colors.amber,
+      // color: Colors.amber,
       alignment: Alignment.center,
       height: 48,
       child: Row(
@@ -1184,7 +1232,7 @@ class _ProfileState extends State<Profile> {
           ),*/
           // SizedBox(width: 10,),
           Padding(
-            padding: EdgeInsets.only(right: app_language_rtl.$ ? 0 : 14.0, left: app_language_rtl.$ ? 14 : 0),
+            padding: const EdgeInsets.only(right: 14.0),
             child: Container(
               width: 48,
               height: 48,
@@ -1215,18 +1263,21 @@ class _ProfileState extends State<Profile> {
                     color: MyTheme.white,
                     fontWeight: FontWeight.w600),
               ),
-              Text(
-                //if user email is not available then check user phone if user phone is not available use empty string
-                "${user_email.$ != "" && user_email.$ != null ? user_email.$ : user_phone.$ != "" && user_phone.$ != null ? user_phone.$ : ''}",
-                style: TextStyle(
-                  color: MyTheme.light_grey,
-                ),
-              ),
+              Padding(
+                  padding: const EdgeInsets.only(top: 4.0),
+                  child: Text(
+                    //if user email is not available then check user phone if user phone is not available use empty string
+                    "${user_email.$ != "" && user_email.$ != null ? user_email.$ : user_phone.$ != "" && user_phone.$ != null ? user_phone.$ : ''}",
+                    style: TextStyle(
+                      color: MyTheme.light_grey,
+                    ),
+                  )),
             ],
           ),
           Spacer(),
           Container(
             width: 90,
+            height: 36,
             child: TextButton(
               // padding: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
               // // 	rgb(50,205,50)
@@ -1249,7 +1300,6 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
-
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.white,

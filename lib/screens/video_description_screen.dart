@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:model_company/my_theme.dart';
 import 'package:model_company/helpers/shared_value_helper.dart';
-
+import 'package:video_player/video_player.dart';
 class VideoDescription extends StatefulWidget {
   String url;
+  String video;
 
-  VideoDescription({Key key, this.url}) : super(key: key);
+  VideoDescription({Key key, this.url, this.video}) : super(key: key);
 
   @override
   _VideoDescriptionState createState() => _VideoDescriptionState();
@@ -16,11 +17,20 @@ class VideoDescription extends StatefulWidget {
 
 class _VideoDescriptionState extends State<VideoDescription> {
  // WebViewController _webViewController;
+ VideoPlayerController _controller;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    _controller = VideoPlayerController.networkUrl(Uri.parse(
+        widget.video))
+      ..initialize().then((_) {
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+        setState(() {});
+      });
+
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
   }
@@ -39,7 +49,7 @@ class _VideoDescriptionState extends State<VideoDescription> {
         textDirection: app_language_rtl.$ ? TextDirection.rtl : TextDirection.ltr,
         child: Scaffold(
           backgroundColor: Colors.white,
-          body: buildBody(),
+          body: widget.video != null ? buildVideoBody() : buildBody(),
         ),
       ),
     );
@@ -94,5 +104,16 @@ class _VideoDescriptionState extends State<VideoDescription> {
         ),
       ),
     );
+  }
+
+  buildVideoBody() {
+    return Center(
+          child: _controller.value.isInitialized
+              ? AspectRatio(
+                  aspectRatio: _controller.value.aspectRatio,
+                  child: VideoPlayer(_controller),
+                )
+              : Container(),
+        );
   }
 }

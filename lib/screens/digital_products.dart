@@ -130,7 +130,8 @@ class _DigitalProductsState extends State<DigitalProducts> {
                 name: _digitalProductItems[index].product.name,
                 main_price: _digitalProductItems[index].product.base_price,
                 //stroked_price: _digitalProductItems[index].product.stroked_price,
-                has_discount: false
+                has_discount: false,
+                currency_symbol: _digitalProductItems[index].currency_symbol,
             );
           },
         ),

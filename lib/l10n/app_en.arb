@@ -500,5 +500,8 @@
     "min_qty" : "Min Qty",
     "max_qty" : "Max Qty",
     "price_pc" : "Price",
-    "cash_on_delivery" : "Cash On Delivery"
+    "cash_on_delivery" : "Cash On Delivery",
+      "product_details_screen_delete_account" : "Delete Account",
+      "order_placed_successfully" : "Your Order Placed Successfully",
+      "cart_screen_total_price" : "Total Price"
 }

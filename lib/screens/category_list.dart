@@ -306,7 +306,7 @@ class _CategoryListState extends State<CategoryList> {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   style: TextStyle(
-                      color: MyTheme.font_grey,
+                      color: MyTheme.secondary_color,
                       fontSize: 10,
                       height: 1.6,
                       fontWeight: FontWeight.w600),

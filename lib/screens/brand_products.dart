@@ -201,6 +201,7 @@ class _BrandProductsState extends State<BrandProducts> {
                   stroked_price: _productList[index].stroked_price,
                   has_discount: _productList[index].has_discount,
                   discount: _productList[index].discount,
+                  currency_symbol: _productList[index].currency_symbol,
               );
             },
           ),

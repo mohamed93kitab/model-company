@@ -79,6 +79,7 @@ class _TopSellingProductsState extends State<TopSellingProducts> {
                         productResponse.products[index].stroked_price,
                     has_discount: productResponse.products[index].has_discount,
                     discount: productResponse.products[index].discount,
+                    currency_symbol: productResponse.products[index].currency_symbol,
                   );
                 },
               ),

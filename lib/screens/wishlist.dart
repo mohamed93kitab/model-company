@@ -150,6 +150,7 @@ class _WishlistState extends State<Wishlist> {
                 main_price: _wishlistItems[index].product.base_price,
                 stroked_price:"0",
                 has_discount: false,
+                currency_symbol: _wishlistItems[index].product.currency_symbol,
             );
           },
         ),
