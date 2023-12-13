@@ -253,7 +253,7 @@ class _ProfileEditState extends State<ProfileEdit> {
       centerTitle: false,
       leading: Builder(
         builder: (context) => IconButton(
-          icon: Icon(CupertinoIcons.arrow_left, color: MyTheme.dark_grey),
+          icon: Icon(app_language_rtl.$ ? CupertinoIcons.arrow_right : CupertinoIcons.arrow_left, color: MyTheme.dark_grey),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -309,7 +309,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
           child: Stack(
             children: [
-              UsefulElements.roundImageWithPlaceholder(url:avatar_original.$,height: 120.0,width: 120.0,borderRadius: 60.0,elevation: 6.0 ),
+              UsefulElements.roundImageWithPlaceholder(url:"https://cdn-icons-png.flaticon.com/512/565/565452.png",height: 120.0,width: 120.0,borderRadius: 60.0,elevation: 6.0 ),
 /*
               Container(
                 width: 120,
@@ -329,30 +329,30 @@ class _ProfileEditState extends State<ProfileEdit> {
                       fit: BoxFit.fill,
                     )),
               ),*/
-              Positioned(
-                right: 8,
-                bottom: 8,
-                child: SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: TextButton(
-                   // padding: EdgeInsets.all(0),
-                    child: Icon(
-                      Icons.edit,
-                      color: MyTheme.font_grey,
-                      size: 14,
-                    ),
-                    // shape: CircleBorder(
-                    //   side:
-                    //       new BorderSide(color: MyTheme.light_grey, width: 1.0),
-                    // ),
-                    // color: MyTheme.light_grey,
-                    onPressed: () {
-                      chooseAndUploadImage(context);
-                    },
-                  ),
-                ),
-              )
+              // Positioned(
+              //   right: 8,
+              //   bottom: 8,
+              //   child: SizedBox(
+              //     width: 24,
+              //     height: 24,
+              //     child: TextButton(
+              //      // padding: EdgeInsets.all(0),
+              //       child: Icon(
+              //         Icons.edit,
+              //         color: MyTheme.font_grey,
+              //         size: 14,
+              //       ),
+              //       // shape: CircleBorder(
+              //       //   side:
+              //       //       new BorderSide(color: MyTheme.light_grey, width: 1.0),
+              //       // ),
+              //       // color: MyTheme.light_grey,
+              //       onPressed: () {
+              //         chooseAndUploadImage(context);
+              //       },
+              //     ),
+              //   ),
+              // )
             ],
           ),
         ),

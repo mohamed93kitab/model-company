@@ -1246,7 +1246,7 @@ class _ProfileState extends State<Profile> {
                   borderRadius: BorderRadius.all(Radius.circular(100.0)),
                   child: FadeInImage.assetNetwork(
                     placeholder: 'assets/placeholder.png',
-                    image: "${avatar_original.$}",
+                    image: "${"https://cdn-icons-png.flaticon.com/512/565/565452.png"}",
                     fit: BoxFit.fill,
                   )),
             ),
@@ -1264,7 +1264,7 @@ class _ProfileState extends State<Profile> {
                     fontWeight: FontWeight.w600),
               ),
               Padding(
-                  padding: const EdgeInsets.only(top: 4.0),
+                  padding: const EdgeInsets.only(top: 0.0),
                   child: Text(
                     //if user email is not available then check user phone if user phone is not available use empty string
                     "${user_email.$ != "" && user_email.$ != null ? user_email.$ : user_phone.$ != "" && user_phone.$ != null ? user_phone.$ : ''}",
@@ -1277,7 +1277,7 @@ class _ProfileState extends State<Profile> {
           Spacer(),
           Container(
             width: 90,
-            height: 36,
+            height: 39,
             child: TextButton(
               // padding: EdgeInsets.symmetric(horizontal: 14, vertical: 7),
               // // 	rgb(50,205,50)

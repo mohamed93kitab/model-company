@@ -60,7 +60,7 @@ class _MainDrawerState extends State<MainDrawer> {
                     ? ListTile(
                         leading: CircleAvatar(
                           backgroundImage: NetworkImage(
-                             "${avatar_original.$}",
+                             "${"https://cdn-icons-png.flaticon.com/512/565/565452.png"}",
                           ),
                         ),
                         title: Text("${user_name.$}", style: TextStyle(color: MyTheme.secondary_color),),
