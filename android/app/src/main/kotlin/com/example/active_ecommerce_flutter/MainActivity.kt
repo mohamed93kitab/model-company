@@ -1,4 +1,4 @@
-package com.light-speed.model
+package com.lightspeed.model
 
 import io.flutter.embedding.android.FlutterActivity
 

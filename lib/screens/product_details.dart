@@ -1016,7 +1016,8 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                                 EdgeInsets.only(top: 14, left: 14, right: 14),
                             child: _productDetails != null
                                 ? (_wholesaleList.length > 0
-                                    ? buildWholesaleTable()
+                                    ? Container()
+                               //buildWholesaleTable()
                                     : Container())
                                 : ShimmerHelper().buildBasicShimmer(
                                     height: 30.0,
@@ -1064,7 +1065,7 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
                                     AppLocalizations.of(context)
                                         .product_details_screen_description,
                                     style: TextStyle(
-                                        color: MyTheme.secondary_color,
+                                        color: MyTheme.white,
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -2284,8 +2285,18 @@ class _ProductDetailsState extends State<ProductDetails> with TickerProviderStat
         children: <Widget>[
           Expandable(
             collapsed: Container(
-                height: 50, child: Html(data: _productDetails.description,)),
-            expanded: Container(child: Html(data: _productDetails.description)),
+                height: 50, child: Html(data: _productDetails.description, style: {
+              "body": Style(
+                fontSize: FontSize(16.0),
+                color: MyTheme.white,
+              ),
+            },)),
+            expanded: Container(child: Html(data: _productDetails.description, style: {
+              "body": Style(
+                fontSize: FontSize(16.0),
+                color: MyTheme.white,
+              ),
+            })),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,

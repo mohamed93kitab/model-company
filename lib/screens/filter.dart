@@ -30,7 +30,7 @@ class WhichFilter {
   static List<WhichFilter> getWhichFilterList() {
     return <WhichFilter>[
       WhichFilter('product', AppLocalizations.of(OneContext().context).filter_screen_product),
-      WhichFilter('sellers', AppLocalizations.of(OneContext().context).filter_screen_sellers),
+  //    WhichFilter('sellers', AppLocalizations.of(OneContext().context).filter_screen_sellers),
       WhichFilter('brands', AppLocalizations.of(OneContext().context).filter_screen_brands),
     ];
   }
@@ -444,6 +444,7 @@ class _FilterState extends State<Filter> {
           height: 36,
           width: MediaQuery.of(context).size.width * .33,
           child: new DropdownButton<WhichFilter>(
+            dropdownColor: MyTheme.accent_color,
             icon: Padding(
               padding: app_language_rtl.$ ? const EdgeInsets.only(right: 12.0) :  const EdgeInsets.only(left: 18.0),
               child: Icon(Icons.expand_more, color:  MyTheme.secondary_color,),
@@ -637,7 +638,7 @@ class _FilterState extends State<Filter> {
                               TextButton(
                                 child: Text(
                                   AppLocalizations.of(context).common_close_in_all_capital,
-                                  style: TextStyle(color: MyTheme.secondary_color),
+                                  style: TextStyle(color: MyTheme.accent_color),
                                 ),
                                 onPressed: () {
                                   Navigator.of(context, rootNavigator: true)
@@ -691,11 +692,12 @@ class _FilterState extends State<Filter> {
   Row buildTopAppbar(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <
         Widget>[
-      IconButton(
-        padding: EdgeInsets.zero,
-        icon:UsefulElements.backButton(context),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+      // IconButton(
+      //   padding: EdgeInsets.zero,
+      //   icon:UsefulElements.backButton(context),
+      //   onPressed: () => Navigator.of(context).pop(),
+      // ),
+      SizedBox(width: 0,),
       Container(
         width: MediaQuery.of(context).size.width * .6,
         child: Container(
