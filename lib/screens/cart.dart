@@ -620,7 +620,7 @@ class _CartState extends State<Cart> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 18.0),
+                      padding: const EdgeInsets.only(bottom: 6.0),
                       child: Row(
                         children: [
                           Container(
@@ -660,6 +660,16 @@ class _CartState extends State<Cart> {
                       ),
                     ),
 
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 6.0),
+                      child: Text(_shopList[seller_index]
+                          .cart_items[item_index]
+                          .variation, style: TextStyle(
+                        color: MyTheme.light_grey,
+                        fontSize: 14
+                      ),),
+                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -688,7 +698,7 @@ class _CartState extends State<Cart> {
                                   .quantity
                                   .toString(),
                               style:
-                              TextStyle(color: MyTheme.accent_color, fontSize: 16),
+                              TextStyle(color: MyTheme.secondary_color, fontSize: 16),
                             ),
                             SizedBox(width: 18,),
                             GestureDetector(

@@ -325,7 +325,7 @@ class _RegistrationState extends State<Registration> {
                                     setState((){});
                                 }),),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 3.0),
                               child: Container(
                                 width: DeviceInfo(context).width-130,
                                 child: RichText(
@@ -334,7 +334,7 @@ class _RegistrationState extends State<Registration> {
                                   style: TextStyle(color: MyTheme.font_grey,fontSize: 12),
                                  children: [
                                    TextSpan(
-                                    text: "I agree to the",
+                                    text: "  I agree to the",
                                    ),
 
                                    TextSpan(

@@ -40,12 +40,12 @@ class AuthScreen{
                         Align(
                           alignment: Alignment.topRight,
                           child: Container(
-                            margin: EdgeInsets.only(right: 18),
+                            margin: EdgeInsets.only(top: 40,right: 30),
                             height: 30,
                             child: InkWell(
                                 onTap: (){
                                   Navigator.pop(context);
-                                }, child: Icon(Icons.close,color: MyTheme.white,size: 20,)),),
+                                }, child: Icon(Icons.close,color: MyTheme.white,size: 28,)),),
                         ),
                     Padding(
                       padding: const EdgeInsets.only(top: 48.0),
@@ -89,6 +89,7 @@ class AuthScreen{
                 )
               ],
             ),
+
           ],
         ),
       ),
