@@ -1,4 +1,4 @@
-package com.lightspeed.model
+package com.lightspeed.babalgharb
 
 import io.flutter.embedding.android.FlutterActivity
 
